@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">TinkDemo</string>
+    <string name="action_settings">Settings</string>
+
+    <!--main -->
+    <string name="main_tab_city_guide">CITY GUIDE</string>
+    <string name="main_tab_shop">SHOP</string>
+    <string name="main_tab_eat">EAT</string>
+
+</resources>
