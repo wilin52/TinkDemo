@@ -58,7 +58,7 @@ public class CityGuideFragment extends BaseMvpFragment<CityView, CityGuidePresen
         /**
          * 加载列表，load data.
          */
-        presenter.loadCityGuide();
+        presenter.loadCityGuide(getContext());
     }
 
     @Override

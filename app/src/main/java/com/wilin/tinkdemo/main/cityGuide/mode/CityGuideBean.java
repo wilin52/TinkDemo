@@ -13,11 +13,11 @@ public class CityGuideBean implements Serializable{
     /**
      * type of item which displayed.
      */
-    private @CityGuideType int type;
+    private @CityGuideType int guideType;
     /**
      * the url of image,both kind of item have.
      */
-    private String imageSrc;
+    private String imageUrl;
     /**
      * only CityGuideType.DESCRIPTION has
      */
@@ -25,22 +25,22 @@ public class CityGuideBean implements Serializable{
     /**
      * only CityGuideType.DESCRIPTION has
      */
-    private String description;
+    private String descriptionDetail;
 
-    public @CityGuideType int getType() {
-        return type;
+    public int getGuideType() {
+        return guideType;
     }
 
-    public void setType(@CityGuideType int type) {
-        this.type = type;
+    public void setGuideType(int guideType) {
+        this.guideType = guideType;
     }
 
-    public String getImageSrc() {
-        return imageSrc;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImageSrc(String imageSrc) {
-        this.imageSrc = imageSrc;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getDescriptionTitle() {
@@ -51,12 +51,11 @@ public class CityGuideBean implements Serializable{
         this.descriptionTitle = descriptionTitle;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDescriptionDetail() {
+        return descriptionDetail;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescriptionDetail(String descriptionDetail) {
+        this.descriptionDetail = descriptionDetail;
     }
-
 }

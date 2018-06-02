@@ -58,7 +58,7 @@ class CityGuideAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        return cityGuideBeanList.get(position).getType();
+        return cityGuideBeanList.get(position).getGuideType();
     }
 
     @Override
@@ -67,13 +67,13 @@ class CityGuideAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         if (holder instanceof CityImageViewHolder) {
 
-            Glide.with(fragment).load(bean.getImageSrc()).skipMemoryCache(false).into(((CityImageViewHolder) holder).imageView);
+            Glide.with(fragment).load(bean.getImageUrl()).skipMemoryCache(false).into(((CityImageViewHolder) holder).imageView);
         } else if (holder instanceof CityDescriptionViewHolder) {
 
             CityDescriptionViewHolder viewHolder = (CityDescriptionViewHolder) holder;
-            Glide.with(fragment).load(bean.getImageSrc()).skipMemoryCache(false).into(viewHolder.imageView);
+            Glide.with(fragment).load(bean.getImageUrl()).skipMemoryCache(false).into(viewHolder.imageView);
             viewHolder.titleTv.setText(bean.getDescriptionTitle());
-            viewHolder.detailTv.setText(bean.getDescription());
+            viewHolder.detailTv.setText(bean.getDescriptionDetail());
         }
     }
 
