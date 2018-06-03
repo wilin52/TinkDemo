@@ -25,31 +25,38 @@ import java.util.Objects;
 public class CityGuidePresenter extends MvpBasePresenter<CityView> {
 
     public void loadCityGuide(Context context) {
-        try{
-            HttpManager.getInstance().execute(new HttpClient.Builder().setMethod(HttpClient.Builder.GET)
-                    .requestUrl("http://api.map.baidu.com/telematics/v3/weather?location=嘉兴&output=json&ak=5slgyqGDENN7Sy7pw29IUvrZ")
-                    .setMediaType(HttpClient.Builder.MEDIA_TYPE_JSON)
-                    .build(),new HttpUIHandler() {
-                        @Override
-                        public void onFailure(int errCode, String msg) {
+//        /**
+//         * 网络请求。
+//         * 已通过，用OK http。
+//         */
+//        try{
+//            HttpManager.getInstance().execute(new HttpClient.Builder().setMethod(HttpClient.Builder.GET)
+//                    .requestUrl("http://api.map.baidu.com/telematics/v3/weather?location=嘉兴&output=json&ak=5slgyqGDENN7Sy7pw29IUvrZ")
+//                    .setMediaType(HttpClient.Builder.MEDIA_TYPE_JSON)
+//                    .build(),new HttpUIHandler() {
+//                        @Override
+//                        public void onFailure(int errCode, String msg) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onSuccess(Objects... object) {
+//                          // 处理数据。
+//                        }
+//
+//                        @Override
+//                        public void onException() {
+//
+//                        }
+//                    });
+//        } catch (Exception e){
+//            Log.e("",e.toString());
+//            e.printStackTrace();
+//        }
 
-                        }
-
-                        @Override
-                        public void onSuccess(Objects... object) {
-
-                        }
-
-                        @Override
-                        public void onException() {
-
-                        }
-                    });
-        } catch (Exception e){
-            Log.e("",e.toString());
-            e.printStackTrace();
-        }
-
+        /**
+         * 加载本地模拟数据。
+         */
         String string = FileUtils.readFromRaw(context, R.raw.city_guide_samples);
         Gson gson = new Gson();
         List<CityGuideBean>list = gson.fromJson(string, new TypeToken<List<CityGuideBean>>(){}.getType());
