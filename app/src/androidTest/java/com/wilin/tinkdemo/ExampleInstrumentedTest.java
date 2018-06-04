@@ -1,8 +1,11 @@
 package com.wilin.tinkdemo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
+
+import com.wilin.tinkdemo.main.MainPageTest;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,5 +25,14 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("com.wilin.tinkdemo", appContext.getPackageName());
+        /**
+         * 启动app， 否则会寻找UI item 失败。
+         */
+        Intent intent = appContext.getPackageManager().getLaunchIntentForPackage(appContext.getPackageName());
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        appContext.startActivity(intent);
+
+        MainPageTest mainPageTest = (MainPageTest)Class.forName("com.wilin.tinkdemo.main.MainPageTest").newInstance();
+        mainPageTest.runTest();
     }
 }
