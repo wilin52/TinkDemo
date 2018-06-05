@@ -18,6 +18,13 @@ public interface CityView extends MvpView{
     void onCityGuideLoadSuccess(List<CityGuideBean> list);
 
     /**
+     * load guides successfully.
+     * 成功返回列表
+     * @param list guides of city.
+     */
+    void onCityGuideLoadMoreSuccess(List<CityGuideBean> list);
+
+    /**
      * fail to load guides of city.
      * 加载失败
      */

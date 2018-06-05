@@ -13,6 +13,7 @@ import com.wilin.tinkdemo.R;
 import com.wilin.tinkdemo.main.cityGuide.CityGuideType;
 import com.wilin.tinkdemo.main.cityGuide.mode.CityGuideBean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,6 +32,14 @@ class CityGuideAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     void setCityGuideBeanList(List<CityGuideBean> cityGuideBeanList) {
         this.cityGuideBeanList = cityGuideBeanList;
+        notifyDataSetChanged();
+    }
+
+    void addCityGuideBeanList(List<CityGuideBean> list){
+        if(null == cityGuideBeanList){
+            cityGuideBeanList = new ArrayList<>();
+        }
+        this.cityGuideBeanList.addAll(list);
         notifyDataSetChanged();
     }
 

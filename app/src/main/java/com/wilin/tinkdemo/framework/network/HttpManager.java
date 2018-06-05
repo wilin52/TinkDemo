@@ -1,7 +1,7 @@
 package com.wilin.tinkdemo.framework.network;
 
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -23,13 +23,17 @@ public class HttpManager {
 
     private HttpManager(){
         /**
-         * use newCachedThreadPool ,but set the maximum num of thread.
+         * use ThreadPool , set the maximum num of thread and alive time ,
+         * and change
          */
         httpService = new ThreadPoolExecutor(0, 50,
                 60L, TimeUnit.SECONDS,
-                new SynchronousQueue<Runnable>());
+                new LinkedBlockingDeque<Runnable>());
     }
 
+    /**
+     * 回调不在Ui线程
+     */
     public void execute(final HttpClient client,final HttpHandler httpHandler){
         httpService.execute(new Runnable() {
             @Override
@@ -39,6 +43,9 @@ public class HttpManager {
         });
     }
 
+    /**
+     * 回调在Ui线程
+     */
     public void execute(final HttpClient client,final HttpUIHandler httpHandler){
         httpService.execute(new Runnable() {
             @Override

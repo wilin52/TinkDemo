@@ -46,4 +46,5 @@ dependencies {
     compile 'com.android.support:design:27.+'
     testCompile 'junit:junit:4.12'
     compile 'com.squareup.okhttp3:okhttp:3.10.0'
+    compile 'com.jcodecraeer:xrecyclerview:1.5.9'
 }

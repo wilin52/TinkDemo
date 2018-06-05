@@ -3,11 +3,12 @@ package com.wilin.tinkdemo.main.cityGuide.ui;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.jcodecraeer.xrecyclerview.ProgressStyle;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.wilin.tinkdemo.R;
 import com.wilin.tinkdemo.framework.mvp.BaseMvpFragment;
 import com.wilin.tinkdemo.main.cityGuide.mode.CityGuideBean;
@@ -26,7 +27,7 @@ public class CityGuideFragment extends BaseMvpFragment<CityView, CityGuidePresen
     public static final String TAG = CityGuideFragment.class.getSimpleName();
 
     @BindView(R.id.city_guide_recycler_view)
-    RecyclerView mRecyclerView;
+    XRecyclerView mRecyclerView;
 
     private CityGuideAdapter adapter;
 
@@ -55,10 +56,24 @@ public class CityGuideFragment extends BaseMvpFragment<CityView, CityGuidePresen
     protected void initView() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(adapter);
-        /**
-         * 加载列表，load data.
-         */
-        presenter.loadCityGuide(getContext());
+        mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
+        mRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.BallRotate);
+        mRecyclerView.setArrowImageView(R.drawable.ic_loading_rotate);
+        mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                /**
+                 * 加载列表，load data.
+                 */
+                presenter.loadCityGuide(getContext());
+            }
+
+            @Override
+            public void onLoadMore() {
+                presenter.loadMoreCityGuide(getContext());
+            }
+        });
+        mRecyclerView.refresh();
     }
 
     @Override
@@ -68,6 +83,13 @@ public class CityGuideFragment extends BaseMvpFragment<CityView, CityGuidePresen
 
     @Override
     public void onCityGuideLoadSuccess(List<CityGuideBean> list) {
+        mRecyclerView.refreshComplete();
         adapter.setCityGuideBeanList(list);
+    }
+
+    @Override
+    public void onCityGuideLoadMoreSuccess(List<CityGuideBean> list) {
+        mRecyclerView.loadMoreComplete();
+        adapter.addCityGuideBeanList(list);
     }
 }

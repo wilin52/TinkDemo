@@ -1,21 +1,16 @@
 package com.wilin.tinkdemo.main.cityGuide.presenter;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
 import com.wilin.tinkdemo.R;
-import com.wilin.tinkdemo.framework.network.HttpClient;
-import com.wilin.tinkdemo.framework.network.HttpManager;
-import com.wilin.tinkdemo.framework.network.HttpUIHandler;
 import com.wilin.tinkdemo.framework.utils.FileUtils;
 import com.wilin.tinkdemo.main.cityGuide.mode.CityGuideBean;
 import com.wilin.tinkdemo.main.cityGuide.view.CityView;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by Lin WenLong on 2018/6/1.
@@ -24,6 +19,10 @@ import java.util.Objects;
  */
 public class CityGuidePresenter extends MvpBasePresenter<CityView> {
 
+    /**
+     * 加载本地模拟数据。
+     * @param context context used for load resources.
+     */
     public void loadCityGuide(Context context) {
 //        /**
 //         * 网络请求。
@@ -63,6 +62,23 @@ public class CityGuidePresenter extends MvpBasePresenter<CityView> {
 
         if (isViewAttached()) {
             getView().onCityGuideLoadSuccess(list);
+        }
+    }
+
+    /**
+     * 加载更多。
+     * @param context context used for load resources.
+     */
+    public void loadMoreCityGuide(Context context){
+        /**
+         * 加载本地模拟数据。
+         */
+        String string = FileUtils.readFromRaw(context, R.raw.city_guide_samples);
+        Gson gson = new Gson();
+        List<CityGuideBean>list = gson.fromJson(string, new TypeToken<List<CityGuideBean>>(){}.getType());
+
+        if (isViewAttached()) {
+            getView().onCityGuideLoadMoreSuccess(list);
         }
     }
 }
