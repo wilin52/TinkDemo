@@ -6,11 +6,12 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.wilin.tinkdemo.main.MainPageTest;
+import com.wilin.tinkdemo.main.guide.GuidePageTest;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Instrumentation test, which will execute on an Android device.
@@ -34,5 +35,7 @@ public class ExampleInstrumentedTest {
 
         MainPageTest mainPageTest = (MainPageTest)Class.forName("com.wilin.tinkdemo.main.MainPageTest").newInstance();
         mainPageTest.runTest();
+        GuidePageTest guidePageTest = (GuidePageTest) Class.forName("com.wilin.tinkdemo.main.guide.GuidePageTest").newInstance();
+        guidePageTest.runTest();
     }
 }
